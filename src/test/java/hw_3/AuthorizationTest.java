@@ -14,12 +14,13 @@ public class AuthorizationTest extends TestConfig {
 
     private final String login = CustomProperties.getProps().getProperty("login");
     private final String password = CustomProperties.getProps().getProperty("password");
+    private final String checkTest1 = "Назначенные мне";
 
     @Test
     @DisplayName("Проверка авторизации")
     public void authorizationTest() {
         loginPage.authorizationInJira(login, password);
         String titleDashboardPage = dashboardPage.getTitle();
-        assertEquals(titleDashboardPage, "Назначенные мне");
+        assertEquals(titleDashboardPage, checkTest1);
     }
 }
