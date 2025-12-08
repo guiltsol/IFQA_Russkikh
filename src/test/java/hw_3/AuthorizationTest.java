@@ -5,6 +5,7 @@ import hw_3.pages.LoginPage;
 import hw_3.utils.CustomProperties;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AuthorizationTest extends TestConfig {

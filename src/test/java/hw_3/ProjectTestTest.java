@@ -6,9 +6,10 @@ import hw_3.pages.ProjectTestPage;
 import hw_3.utils.CustomProperties;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ProjectTestTest extends TestConfig{
+public class ProjectTestTest extends TestConfig {
 
     private final LoginPage loginPage = new LoginPage();
     private final DashboardPage dashboardPage = new DashboardPage();
@@ -28,6 +29,6 @@ public class ProjectTestTest extends TestConfig{
 
         dashboardPage.goInTest();
         String titleProjectPage = projectTestPage.getTitle();
-        assertEquals(titleProjectPage,checkTest2);
+        assertEquals(titleProjectPage, checkTest2);
     }
 }

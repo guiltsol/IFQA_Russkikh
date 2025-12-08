@@ -4,6 +4,7 @@ import hw_3.pages.*;
 import hw_3.utils.CustomProperties;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CreateBugTest extends TestConfig {
@@ -41,7 +42,7 @@ public class CreateBugTest extends TestConfig {
 
         dashboardPage.goInTest();
         String titleProjectPage = projectTestPage.getTitle();
-        assertEquals(titleProjectPage,checkTest2);
+        assertEquals(titleProjectPage, checkTest2);
 
         projectTestPage.switchToAllTasks();
         Integer oldAllTasks = projectTestPage.parseNumber();
@@ -53,7 +54,7 @@ public class CreateBugTest extends TestConfig {
         assertEquals(statusForTestSeleniumATHomeworkPage, testSeleniumATHomeworkPage.parseStatus());
         assertEquals(version, testSeleniumATHomeworkPage.parseVersion());
 
-        createBugPage.bugHistory(projectName,titleTask,description,mark,environment,task,epic,sprint);
-        assertEquals(statusForBug,testSeleniumATHomeworkPage.parseStatus());
+        createBugPage.bugHistory(projectName, titleTask, description, mark, environment, task, epic, sprint);
+        assertEquals(statusForBug, testSeleniumATHomeworkPage.parseStatus());
     }
 }

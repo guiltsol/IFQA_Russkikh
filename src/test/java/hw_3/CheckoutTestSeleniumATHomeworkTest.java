@@ -7,9 +7,10 @@ import hw_3.pages.TestSeleniumATHomeworkPage;
 import hw_3.utils.CustomProperties;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CheckoutTestSeleniumATHomeworkTest extends TestConfig{
+public class CheckoutTestSeleniumATHomeworkTest extends TestConfig {
 
     private final LoginPage loginPage = new LoginPage();
     private final DashboardPage dashboardPage = new DashboardPage();

@@ -3,12 +3,11 @@ package hw_3.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
+
 import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Condition.hidden;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.$x;
 
 public class CreateBugPage {
 
@@ -46,9 +45,9 @@ public class CreateBugPage {
         project.shouldBe(visible, Duration.ofSeconds(10)).sendKeys(projectName + Keys.TAB);
         typeField.shouldBe(visible, Duration.ofSeconds(10)).sendKeys(TYPE_TASK + Keys.TAB);
         labelField.sendKeys(title);
-        if (firstBtnVisual.getAttribute("aria-pressed").equals("false")){
+        if (firstBtnVisual.getAttribute("aria-pressed").equals("false")) {
             firstBtnVisual.click();
-            firstBtnVisual.shouldBe(Condition.attribute("aria-pressed","true"),
+            firstBtnVisual.shouldBe(Condition.attribute("aria-pressed", "true"),
                     Duration.ofSeconds(10));
         }
         switchTo().frame(descriptionArea);
@@ -60,9 +59,9 @@ public class CreateBugPage {
         fixVersion.click();
         priorityField.click();
         markTextArea.sendKeys(mark);
-        if (secondBtnVisual.getAttribute("aria-pressed").equals("false")){
+        if (secondBtnVisual.getAttribute("aria-pressed").equals("false")) {
             secondBtnVisual.click();
-            secondBtnVisual.shouldBe(Condition.attribute("aria-pressed","false"),
+            secondBtnVisual.shouldBe(Condition.attribute("aria-pressed", "false"),
                     Duration.ofSeconds(10));
         }
         switchTo().frame(environmentArea);
@@ -80,14 +79,14 @@ public class CreateBugPage {
         serious.click();
         finishedCreate.click();
         linkFlag.shouldBe(visible, Duration.ofSeconds(10)).click();
-        becomeTask.shouldBe(visible,Duration.ofSeconds(10)).click();
-        flagEnd.shouldBe(visible,Duration.ofSeconds(10));
-        flagEnd.shouldBe(hidden,Duration.ofSeconds(10)); // каждый раз жду, чтобы уведомление закрылось
-        taskInProcess.shouldBe(visible,Duration.ofSeconds(10)).click();
-        flagEnd.shouldBe(visible,Duration.ofSeconds(10));
-        flagEnd.shouldBe(hidden,Duration.ofSeconds(10));
-        businessProc.shouldBe(visible,Duration.ofSeconds(10)).click();
-        readyTask.shouldBe(visible,Duration.ofSeconds(10)).click();
-        flagEnd.shouldBe(visible,Duration.ofSeconds(10));
+        becomeTask.shouldBe(visible, Duration.ofSeconds(10)).click();
+        flagEnd.shouldBe(visible, Duration.ofSeconds(10));
+        flagEnd.shouldBe(hidden, Duration.ofSeconds(10)); // каждый раз жду, чтобы уведомление закрылось
+        taskInProcess.shouldBe(visible, Duration.ofSeconds(10)).click();
+        flagEnd.shouldBe(visible, Duration.ofSeconds(10));
+        flagEnd.shouldBe(hidden, Duration.ofSeconds(10));
+        businessProc.shouldBe(visible, Duration.ofSeconds(10)).click();
+        readyTask.shouldBe(visible, Duration.ofSeconds(10)).click();
+        flagEnd.shouldBe(visible, Duration.ofSeconds(10));
     }
 }
