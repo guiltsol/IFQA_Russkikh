@@ -21,8 +21,7 @@ public class ProjectTestPage {
     private final SelenideElement divInfo = $x("//div[@class='details-layout']");
 
     public String getTitle() {
-        title.shouldBe(Condition.visible, Duration.ofSeconds(10));
-        return title.getText();
+        return title.shouldBe(Condition.visible, Duration.ofSeconds(10)).getText();
     }
 
     public void switchToAllTasks() {
