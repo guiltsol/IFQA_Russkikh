@@ -9,8 +9,8 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class TestSeleniumATHomeworkPage {
 
-    private final SelenideElement statusInfo = $x("//span[@id='status-val']/span");
-    private final SelenideElement versionInfo = $x("//span[@class='shorten']/a");
+    private final SelenideElement statusInfo = $x("//span[@id='status-val']/span").as("Информация о статусе задачи");
+    private final SelenideElement versionInfo = $x("//span[@class='shorten']/a").as("Информация о версии задачи");
 
     public String parseStatus() {
         return statusInfo.shouldBe(visible, Duration.ofSeconds(10)).getText();

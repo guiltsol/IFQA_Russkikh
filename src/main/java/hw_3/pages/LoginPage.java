@@ -9,9 +9,9 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class LoginPage {
 
-    private final SelenideElement loginInput = $x("//input[@id='login-form-username']").as("Поле логина");
-    private final SelenideElement passwordInput = $x("//input[@id='login-form-password']").as("Поле пароля");
-    private final SelenideElement authorizationButton = $x("//input[@value='Войти']");
+    private final SelenideElement loginInput = $x("//input[@id='login-form-username']").as("Поле ввода логина");
+    private final SelenideElement passwordInput = $x("//input[@id='login-form-password']").as("Поле ввода пароля");
+    private final SelenideElement authorizationButton = $x("//input[@value='Войти']").as("Кнопка 'войти'");
 
     public void authorizationInJira(String login, String password) {
         loginInput.shouldBe(Condition.visible, Duration.ofSeconds(10)).sendKeys(login);

@@ -9,9 +9,9 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class DashboardPage {
 
-    private final SelenideElement title = $x("//h3[text() = 'Назначенные мне']");
-    private final SelenideElement dropList = $x("//a[@id='browse_link']");
-    private final SelenideElement testButton = $x("//a[@id='admin_main_proj_link_lnk']");
+    private final SelenideElement title = $x("//h3[text() = 'Назначенные мне']").as("Заголовок 'Назначенные мне' на странице дашборда");
+    private final SelenideElement dropList = $x("//a[@id='browse_link']").as("Выпадающий список по кнопке 'Проекты'");
+    private final SelenideElement testButton = $x("//a[@id='admin_main_proj_link_lnk']").as("Кнопка выбоа проекта 'Test'");
 
     public String getTitle() {
         return title.shouldBe(Condition.visible, Duration.ofSeconds(10)).getText();

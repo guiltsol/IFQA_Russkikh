@@ -10,14 +10,14 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class ProjectTestPage {
 
-    private final SelenideElement descriptionField = $x("//textarea[@class='iic-widget__summary focus-visible']");
-    private final SelenideElement title = $x("//span[@id='issues-subnavigation-title']");
-    private final SelenideElement btnGetAllTasks = $x("//button[@id='subnav-trigger']");
-    private final SelenideElement AllTasks = $x("//a[text() = 'Все задачи']");
-    private final SelenideElement numberTasks = $x("//div[@class='showing']/span[contains(text(),'из')]");
-    private final SelenideElement btnCreateNewTask = $x("//div[@class='iic-trigger']/button[@class='aui-button aui-button-subtle']");
-    private final SelenideElement refreshBtn = $x("//a[@title='Обновить результаты']");
-    private final SelenideElement inputSearch = $x("//input[@id='quickSearchInput']");
+    private final SelenideElement descriptionField = $x("//textarea[@class='iic-widget__summary focus-visible']").as("Поле ввода описания задачи");
+    private final SelenideElement title = $x("//span[@id='issues-subnavigation-title']").as("Заголовок страницы по выбранному фильтру");
+    private final SelenideElement btnGetAllTasks = $x("//button[@id='subnav-trigger']").as("Кнопка переключения фильтра");
+    private final SelenideElement AllTasks = $x("//a[text() = 'Все задачи']").as("Кнопка выбора 'Все задачи' проекта");
+    private final SelenideElement numberTasks = $x("//div[@class='showing']/span[contains(text(),'из')]").as("Раздел кол-ва задачи на проекте");
+    private final SelenideElement btnCreateNewTask = $x("//div[@class='iic-trigger']/button[@class='aui-button aui-button-subtle']").as("Кнопка быстрого создания задачи(плюсик)");
+    private final SelenideElement refreshBtn = $x("//a[@title='Обновить результаты']").as("Кнопка обновления тасок");
+    private final SelenideElement inputSearch = $x("//input[@id='quickSearchInput']").as("Поле поиска сверху");
 
     public String getTitle() {
         title.shouldBe(Condition.visible, Duration.ofSeconds(10));
