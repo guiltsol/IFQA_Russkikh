@@ -18,6 +18,7 @@ public class ProjectTestPage {
     private final SelenideElement btnCreateNewTask = $x("//div[@class='iic-trigger']/button[@class='aui-button aui-button-subtle']").as("Кнопка быстрого создания задачи(плюсик)");
     private final SelenideElement refreshBtn = $x("//a[@title='Обновить результаты']").as("Кнопка обновления тасок");
     private final SelenideElement inputSearch = $x("//input[@id='quickSearchInput']").as("Поле поиска сверху");
+    private final SelenideElement divInfo = $x("//div[@class='details-layout']");
 
     public String getTitle() {
         title.shouldBe(Condition.visible, Duration.ofSeconds(10));
@@ -27,6 +28,9 @@ public class ProjectTestPage {
     public void switchToAllTasks() {
         btnGetAllTasks.shouldBe(Condition.visible, Duration.ofSeconds(10)).click();
         AllTasks.shouldBe(Condition.visible, Duration.ofSeconds(10)).click();
+        divInfo.shouldBe(Condition.visible, Duration.ofSeconds(10)).shouldBe(Condition.enabled, Duration.ofSeconds(10))
+                .shouldBe(Condition.clickable, Duration.ofSeconds(10));
+        refreshBtn.shouldBe(Condition.visible, Duration.ofSeconds(10)).click();
     }
 
     public void quickSearch(String text) {
@@ -34,6 +38,8 @@ public class ProjectTestPage {
     }
 
     public Integer parseNumber() {
+        divInfo.shouldBe(Condition.visible, Duration.ofSeconds(10)).shouldBe(Condition.enabled, Duration.ofSeconds(10))
+                .shouldBe(Condition.clickable, Duration.ofSeconds(10));
         refreshBtn.shouldBe(Condition.visible, Duration.ofSeconds(10)).click();
         String[] value = numberTasks.shouldBe(Condition.visible, Duration.ofSeconds(10)).getText().split("\\D+");
         return Integer.parseInt(value[value.length - 1]);
@@ -42,6 +48,8 @@ public class ProjectTestPage {
     public void createNewTask() {
         btnCreateNewTask.shouldBe(Condition.visible, Duration.ofSeconds(10)).click();
         descriptionField.shouldBe(Condition.visible, Duration.ofSeconds(10)).sendKeys("Test" + Keys.RETURN);
+        divInfo.shouldBe(Condition.visible, Duration.ofSeconds(10)).shouldBe(Condition.enabled, Duration.ofSeconds(10))
+                .shouldBe(Condition.clickable, Duration.ofSeconds(10));
         refreshBtn.shouldBe(Condition.visible, Duration.ofSeconds(10)).click();
     }
 }
