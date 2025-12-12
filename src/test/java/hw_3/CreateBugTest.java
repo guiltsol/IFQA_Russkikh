@@ -25,7 +25,6 @@ public class CreateBugTest extends TestConfig {
     private final String mark = "123";
     private final String environment = "Something env!";
     private final String task = "Test-184712";
-    private final String epic = "epic";
     private final String sprint = "Спринт 1";
     private final String request = "TestSeleniumATHomework";
     private final String statusForTestSeleniumATHomeworkPage = "СДЕЛАТЬ";
@@ -55,7 +54,7 @@ public class CreateBugTest extends TestConfig {
         assertEquals(statusForTestSeleniumATHomeworkPage, testSeleniumATHomeworkPage.parseStatus());
         assertEquals(version, testSeleniumATHomeworkPage.parseVersion());
 
-        createBugPage.bugHistory(projectName, titleTask, description, priority, mark, environment, task, epic, sprint);
+        createBugPage.bugHistory(projectName, titleTask, description, priority, mark, environment, task, sprint);
         assertEquals(statusForBug, testSeleniumATHomeworkPage.parseStatus());
     }
 }

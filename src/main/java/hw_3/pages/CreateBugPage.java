@@ -39,7 +39,7 @@ public class CreateBugPage {
     private static final String TYPE_TASK = "Ошибка";
 
     public void bugHistory(String projectName, String title, String bodyDescription, String priority, String mark,
-                           String bodyEnvironment, String taskLink, String epicLink, String sprintName) {
+                           String bodyEnvironment, String taskLink, String sprintName) {
         btnCreate.click();
         project.shouldBe(visible, Duration.ofSeconds(10)).sendKeys(projectName + Keys.TAB);
         typeField.shouldBe(visible, Duration.ofSeconds(10)).sendKeys(Keys.CONTROL + "a");
@@ -79,7 +79,7 @@ public class CreateBugPage {
         executor.click();
         linkEpic.click();
         linkEpic.shouldBe(attribute("aria-expanded", "true"), Duration.ofSeconds(10))
-                .sendKeys(Keys.DOWN, Keys.ENTER);
+                .sendKeys(Keys.DOWN, Keys.ENTER); //выбор первого сверху эпика
         sprint.sendKeys(sprintName + Keys.DOWN + Keys.ENTER);
         serious.click();
         finishedCreate.click();
