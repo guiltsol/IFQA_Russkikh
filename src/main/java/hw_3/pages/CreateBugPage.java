@@ -1,6 +1,5 @@
 package hw_3.pages;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
 
@@ -23,12 +22,12 @@ public class CreateBugPage {
     private final SelenideElement priorityField = $x("//input[@id='priority-field']").as("Поле выбора приоритета задачи");
     private final SelenideElement markTextArea = $x("//textarea[@id='labels-textarea']").as("Поле 'Метки'");
     private final SelenideElement environmentArea = $x("//div[@id='environment-wiki-edit']//iframe").as("Поле ввода окружения");
-    private final SelenideElement relations = $x("//select[@id='issuelinks-linktype']/option[@value='clones']").as("Поле 'Связанные задачи' выбор clones");
-    private final SelenideElement task = $x("//div[@id='issuelinks-issues-multi-select']/textarea").as("Поле 'Задачи'");
-    private final SelenideElement executor = $x("//button[@id='assign-to-me-trigger']").as("Поле 'Исполнитель'");
+    private final SelenideElement relations = $x("//select[@id='issuelinks-linktype']/option[@value='is blocked by']").as("Поле 'Связанные задачи' выбор is blocked by");
+    private final SelenideElement task = $x("//div[@id='issuelinks-issues-multi-select']/textarea").as("Поле 'Задача'");
+    private final SelenideElement executor = $x("//button[@id='assign-to-me-trigger']").as("Кнопка 'Назначить меня'");
     private final SelenideElement linkEpic = $x("//input[@id='customfield_10100-field']").as("Поле ссылки на эпик");
     private final SelenideElement sprint = $x("//input[@id='customfield_10104-field']").as("Поле выбора спринта");
-    private final SelenideElement serious = $x("//select[@class='select cf-select']/option[@value='10101']").as("Поле выбора серьезности бага");
+    private final SelenideElement serious = $x("//select[@class='select cf-select']/option[@value='10101']").as("Поле выбора серьезности бага 'Minor'");
     private final SelenideElement finishedCreate = $x("//input[@id='create-issue-submit']").as("Финишная кнопка создать задачу(баг)");
     private final SelenideElement linkFlag = $x("//a[@class='issue-created-key issue-link']").as("Гиперссылка перехода на только что созданную задачу в уведомлении");
     private final SelenideElement businessProc = $x("//a[@id='opsbar-transitions_more']").as("Выпадающий список 'Бизнес-процесс'");
@@ -39,15 +38,17 @@ public class CreateBugPage {
 
     private static final String TYPE_TASK = "Ошибка";
 
-    public void bugHistory(String projectName, String title, String bodyDescription, String mark,
+    public void bugHistory(String projectName, String title, String bodyDescription, String priority, String mark,
                            String bodyEnvironment, String taskLink, String epicLink, String sprintName) {
         btnCreate.click();
         project.shouldBe(visible, Duration.ofSeconds(10)).sendKeys(projectName + Keys.TAB);
-        typeField.shouldBe(visible, Duration.ofSeconds(10)).sendKeys(TYPE_TASK + Keys.TAB);
-        labelField.sendKeys(title);
+        typeField.shouldBe(visible, Duration.ofSeconds(10)).sendKeys(Keys.CONTROL + "a");
+        typeField.sendKeys(Keys.DELETE);
+        typeField.setValue(TYPE_TASK);
+        labelField.shouldBe(visible, enabled, interactable, clickable).setValue(title);
         if (firstBtnVisual.getAttribute("aria-pressed").equals("false")) {
             firstBtnVisual.click();
-            firstBtnVisual.shouldBe(Condition.attribute("aria-pressed", "true"),
+            firstBtnVisual.shouldBe(attribute("aria-pressed", "true"),
                     Duration.ofSeconds(10));
         }
         switchTo().frame(descriptionArea);
@@ -57,11 +58,13 @@ public class CreateBugPage {
         body.setValue(bodyDescription);
         switchTo().defaultContent();
         fixVersion.click();
-        priorityField.click();
+        priorityField.shouldBe(visible, Duration.ofSeconds(10)).sendKeys(Keys.CONTROL + "a");
+        priorityField.sendKeys(Keys.DELETE);
+        priorityField.setValue(priority);
         markTextArea.sendKeys(mark);
         if (secondBtnVisual.getAttribute("aria-pressed").equals("false")) {
             secondBtnVisual.click();
-            secondBtnVisual.shouldBe(Condition.attribute("aria-pressed", "false"),
+            secondBtnVisual.shouldBe(attribute("aria-pressed", "true"),
                     Duration.ofSeconds(10));
         }
         switchTo().frame(environmentArea);
@@ -74,7 +77,9 @@ public class CreateBugPage {
         relations.click();
         task.sendKeys(taskLink + Keys.TAB);
         executor.click();
-        linkEpic.sendKeys(epicLink + Keys.DOWN + Keys.ENTER);
+        linkEpic.click();
+        linkEpic.shouldBe(attribute("aria-expanded", "true"), Duration.ofSeconds(10))
+                .sendKeys(Keys.DOWN, Keys.ENTER);
         sprint.sendKeys(sprintName + Keys.DOWN + Keys.ENTER);
         serious.click();
         finishedCreate.click();

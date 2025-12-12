@@ -19,8 +19,9 @@ public class CreateBugTest extends TestConfig {
     private final String password = CustomProperties.getProps().getProperty("password");
 
     private final String projectName = "Test";
-    private final String titleTask = "New_Bug_AT2";
+    private final String titleTask = "NewBugAT2";
     private final String description = "Something wrong!";
+    private final String priority = "Lowest";
     private final String mark = "123";
     private final String environment = "Something env!";
     private final String task = "Test-184712";
@@ -54,7 +55,7 @@ public class CreateBugTest extends TestConfig {
         assertEquals(statusForTestSeleniumATHomeworkPage, testSeleniumATHomeworkPage.parseStatus());
         assertEquals(version, testSeleniumATHomeworkPage.parseVersion());
 
-        createBugPage.bugHistory(projectName, titleTask, description, mark, environment, task, epic, sprint);
+        createBugPage.bugHistory(projectName, titleTask, description, priority, mark, environment, task, epic, sprint);
         assertEquals(statusForBug, testSeleniumATHomeworkPage.parseStatus());
     }
 }
