@@ -26,17 +26,11 @@ public class SpringTest {
 
     @Test
     void fullAuthFlow() {
-
         steps.register();
-
         steps.loginFail(wrongName, expectedFailLogin);
-
         steps.passFail(wromgPass, expectedFailPass);
-
         UUID token = steps.loginSuccess();
-
         steps.logoutFail(expectedLogoutFail);
-
         steps.logout(token, expectedLogoutSuccess);
     }
 }
