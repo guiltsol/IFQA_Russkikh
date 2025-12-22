@@ -19,7 +19,6 @@ public class ProjectTestTest extends TestConfig {
     private final String password = CustomProperties.getProps().getProperty("password");
     private final String checkTest1 = CustomProperties.getProps().getProperty("checkTest1");
     private final String checkTest2 = CustomProperties.getProps().getProperty("checkTest2");
-    ;
 
     @Test
     @DisplayName("Проверка перерехода в проект Test")
