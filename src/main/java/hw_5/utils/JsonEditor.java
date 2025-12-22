@@ -15,9 +15,8 @@ public class JsonEditor {
         return (ObjectNode) objectMapper.readTree(new File(path));
     }
 
-    public static ObjectNode change(ObjectNode json, String fieldName, String value) {
+    public static void change(ObjectNode json, String fieldName, String value) {
         json.put(fieldName, value);
-        return json;
     }
 
     public static ObjectNode createCopy(ObjectNode original) {

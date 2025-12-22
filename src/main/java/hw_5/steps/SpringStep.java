@@ -71,7 +71,6 @@ public class SpringStep {
                 .log().all()
                 .extract()
                 .asString();
-
         Assertions.assertEquals(expected, response);
     }
 }

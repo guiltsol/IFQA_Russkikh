@@ -12,7 +12,6 @@ import java.util.*;
 public class RickAndMortySteps {
 
     private List<Map<String, List<String>>> listOfMortys;
-    private int lastEpisodeId;
     private Episode lastEpisode;
     private int lastCharacterId;
     private Character lastCharacter;
@@ -22,9 +21,7 @@ public class RickAndMortySteps {
     }
 
     public void getListCharByName(String name) {
-
         String endpoint = "/character/?name=" + name;
-
         listOfMortys = RickAndMortyApi.getRequest(EnvConstants.RICKANDMORTY_URL, endpoint)
                 .statusCode(HttpStatus.SC_OK)
                 .extract()
@@ -41,8 +38,9 @@ public class RickAndMortySteps {
                 episodeIds.add(extractNumber(episodeUrl));
             }
         }
-        lastEpisodeId = Collections.max(episodeIds);
-        lastEpisode = RickAndMortyApi.getRequest(EnvConstants.RICKANDMORTY_URL, "/episode/" + lastEpisodeId)
+        int lastEpisodeId = Collections.max(episodeIds);
+        lastEpisode = RickAndMortyApi.getRequest(EnvConstants.RICKANDMORTY_URL,
+                        "/episode/" + lastEpisodeId)
                 .statusCode(HttpStatus.SC_OK)
                 .extract()
                 .body()
@@ -59,7 +57,8 @@ public class RickAndMortySteps {
     }
 
     public void getCharacterById() {
-        lastCharacter = RickAndMortyApi.getRequest(EnvConstants.RICKANDMORTY_URL, "/character/" + lastCharacterId)
+        lastCharacter = RickAndMortyApi.getRequest(EnvConstants.RICKANDMORTY_URL,
+                        "/character/" + lastCharacterId)
                 .statusCode(HttpStatus.SC_OK)
                 .extract()
                 .body()
