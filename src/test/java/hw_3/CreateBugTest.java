@@ -17,21 +17,21 @@ public class CreateBugTest extends TestConfig {
 
     private final String login = CustomProperties.getProps().getProperty("login");
     private final String password = CustomProperties.getProps().getProperty("password");
-
-    private final String projectName = "Test";
-    private final String titleTask = "NewBugAT2";
-    private final String description = "Something wrong!";
-    private final String priority = "Lowest";
-    private final String mark = "123";
-    private final String environment = "Something env!";
-    private final String task = "Test-184712";
-    private final String sprint = "Спринт 1";
-    private final String request = "TestSeleniumATHomework";
-    private final String statusForTestSeleniumATHomeworkPage = "СДЕЛАТЬ";
-    private final String statusForBug = "ГОТОВО";
-    private final String version = "Version 2.0";
-    private final String checkTest1 = "Назначенные мне";
-    private final String checkTest2 = "Открытые задачи";
+    private final String projectName = CustomProperties.getProps().getProperty("projectName");
+    private final String titleTask = CustomProperties.getProps().getProperty("titleTask");
+    private final String description = CustomProperties.getProps().getProperty("description");
+    private final String priority = CustomProperties.getProps().getProperty("priority");
+    private final String mark = CustomProperties.getProps().getProperty("mark");
+    private final String environment = CustomProperties.getProps().getProperty("environment");
+    private final String task = CustomProperties.getProps().getProperty("task");
+    private final String sprint = CustomProperties.getProps().getProperty("sprint");
+    private final String request = CustomProperties.getProps().getProperty("request");
+    private final String statusForTestSeleniumATHomeworkPage = CustomProperties.getProps().getProperty("statusDo");
+    private final String statusForBug = CustomProperties.getProps().getProperty("statusOk");
+    private final String version = CustomProperties.getProps().getProperty("version");
+    private final String checkTest1 = CustomProperties.getProps().getProperty("checkTest1");
+    private final String checkTest2 = CustomProperties.getProps().getProperty("checkTest2");
+    private final String type_task = CustomProperties.getProps().getProperty("type_task");
 
     @Test
     @DisplayName("Проверка жизненного цикла бага")
@@ -54,7 +54,7 @@ public class CreateBugTest extends TestConfig {
         assertEquals(statusForTestSeleniumATHomeworkPage, testSeleniumATHomeworkPage.parseStatus());
         assertEquals(version, testSeleniumATHomeworkPage.parseVersion());
 
-        createBugPage.bugHistory(projectName, titleTask, description, priority, mark, environment, task, sprint);
+        createBugPage.bugHistory(projectName, titleTask, description, priority, mark, environment, task, sprint, type_task);
         assertEquals(statusForBug, testSeleniumATHomeworkPage.parseStatus());
     }
 }

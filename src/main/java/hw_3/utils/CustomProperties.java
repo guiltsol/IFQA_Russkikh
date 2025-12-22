@@ -2,11 +2,9 @@ package hw_3.utils;
 
 import lombok.Getter;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-
 
 public class CustomProperties {
 
@@ -15,7 +13,7 @@ public class CustomProperties {
 
     public static void loadProperties() {
         try {
-            props.load(new FileInputStream(new File("src/main/resources/config.properties")));
+            props.load(new FileInputStream(("src/test/resources/config.properties")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

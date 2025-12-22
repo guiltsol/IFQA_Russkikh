@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
 
 import java.time.Duration;
+import java.util.Objects;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -36,43 +37,21 @@ public class CreateBugPage {
     private final SelenideElement becomeTask = $x("//a[@id='action_id_11']").as("Кнопка Нужно сделать");
     private final SelenideElement taskInProcess = $x("//a[@id='action_id_21']").as("Кнопка В работе");
 
-    private static final String TYPE_TASK = "Ошибка";
-
     public void bugHistory(String projectName, String title, String bodyDescription, String priority, String mark,
-                           String bodyEnvironment, String taskLink, String sprintName) {
+                           String bodyEnvironment, String taskLink, String sprintName, String type_task) {
         btnCreate.click();
         project.shouldBe(visible, Duration.ofSeconds(10)).sendKeys(projectName + Keys.TAB);
         typeField.shouldBe(visible, Duration.ofSeconds(10)).sendKeys(Keys.CONTROL + "a");
         typeField.sendKeys(Keys.DELETE);
-        typeField.setValue(TYPE_TASK);
+        typeField.setValue(type_task);
         labelField.shouldBe(visible, enabled, interactable, clickable).setValue(title);
-        if (firstBtnVisual.getAttribute("aria-pressed").equals("false")) {
-            firstBtnVisual.click();
-            firstBtnVisual.shouldBe(attribute("aria-pressed", "true"),
-                    Duration.ofSeconds(10));
-        }
-        switchTo().frame(descriptionArea);
-        SelenideElement body = $("body");
-        body.shouldBe(visible, enabled);
-        body.clear();
-        body.setValue(bodyDescription);
-        switchTo().defaultContent();
+        checkingTheButtonPressAndAddingARecord(firstBtnVisual, descriptionArea, bodyDescription);
         fixVersion.click();
         priorityField.shouldBe(visible, Duration.ofSeconds(10)).sendKeys(Keys.CONTROL + "a");
         priorityField.sendKeys(Keys.DELETE);
         priorityField.setValue(priority);
         markTextArea.sendKeys(mark);
-        if (secondBtnVisual.getAttribute("aria-pressed").equals("false")) {
-            secondBtnVisual.click();
-            secondBtnVisual.shouldBe(attribute("aria-pressed", "true"),
-                    Duration.ofSeconds(10));
-        }
-        switchTo().frame(environmentArea);
-        SelenideElement secondBody = $("body");
-        secondBody.shouldBe(visible, enabled);
-        secondBody.clear();
-        secondBody.setValue(bodyEnvironment);
-        switchTo().defaultContent();
+        checkingTheButtonPressAndAddingARecord(secondBtnVisual, environmentArea, bodyEnvironment);
         takeVersion.click();
         relations.click();
         task.sendKeys(taskLink + Keys.TAB);
@@ -83,6 +62,10 @@ public class CreateBugPage {
         sprint.sendKeys(sprintName + Keys.DOWN + Keys.ENTER);
         serious.click();
         finishedCreate.click();
+        switchingTheBugState();
+    }
+
+    public void switchingTheBugState() {
         linkFlag.shouldBe(visible, Duration.ofSeconds(10)).click();
         becomeTask.shouldBe(visible, Duration.ofSeconds(10)).click();
         flagEnd.shouldBe(visible, Duration.ofSeconds(10));
@@ -93,5 +76,20 @@ public class CreateBugPage {
         businessProc.shouldBe(visible, Duration.ofSeconds(10)).click();
         readyTask.shouldBe(visible, Duration.ofSeconds(10)).click();
         flagEnd.shouldBe(visible, Duration.ofSeconds(10));
+    }
+
+    public void checkingTheButtonPressAndAddingARecord(SelenideElement firstBtnVisual,
+                                                       SelenideElement descriptionArea, String bodyDescription) {
+        if (Objects.equals(firstBtnVisual.getAttribute("aria-pressed"), "false")) {
+            firstBtnVisual.click();
+            firstBtnVisual.shouldBe(attribute("aria-pressed", "true"),
+                    Duration.ofSeconds(10));
+        }
+        switchTo().frame(descriptionArea);
+        SelenideElement body = $("body");
+        body.shouldBe(visible, enabled);
+        body.clear();
+        body.setValue(bodyDescription);
+        switchTo().defaultContent();
     }
 }

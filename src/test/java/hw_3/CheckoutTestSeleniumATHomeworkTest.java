@@ -19,11 +19,11 @@ public class CheckoutTestSeleniumATHomeworkTest extends TestConfig {
 
     private final String login = CustomProperties.getProps().getProperty("login");
     private final String password = CustomProperties.getProps().getProperty("password");
-    private final String request = "TestSeleniumATHomework";
-    private final String status = "СДЕЛАТЬ";
-    private final String version = "Version 2.0";
-    private final String checkTest1 = "Назначенные мне";
-    private final String checkTest2 = "Открытые задачи";
+    private final String request = CustomProperties.getProps().getProperty("request");
+    private final String status = CustomProperties.getProps().getProperty("statusDo");
+    private final String version = CustomProperties.getProps().getProperty("version");
+    private final String checkTest1 = CustomProperties.getProps().getProperty("checkTest1");
+    private final String checkTest2 = CustomProperties.getProps().getProperty("checkTest2");
 
     @Test
     @DisplayName("Проверка статуса и версии задачи - TestSeleniumATHomework")

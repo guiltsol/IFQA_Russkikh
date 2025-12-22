@@ -15,7 +15,7 @@ public class AuthorizationTest extends TestConfig {
 
     private final String login = CustomProperties.getProps().getProperty("login");
     private final String password = CustomProperties.getProps().getProperty("password");
-    private final String checkTest1 = "Назначенные мне";
+    private final String checkTest1 = CustomProperties.getProps().getProperty("checkTest1");
 
     @Test
     @DisplayName("Проверка авторизации")

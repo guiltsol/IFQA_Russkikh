@@ -20,8 +20,8 @@ public class TestConfig {
    public static void initBrowser() {
       Configuration.pageLoadStrategy = PageLoadStrategy.EAGER.toString();
       Configuration.browser = CustomProperties.getProps().getProperty("browser");
+      System.setProperty("webdriver.chrome.driver", CustomProperties.getProps().getProperty("pathToWebDriver"));
       Configuration.timeout = Integer.parseInt(CustomProperties.getProps().getProperty("timeout"));
-
       Selenide.open(CustomProperties.getProps().getProperty("main.url"));
       getWebDriver().manage().window().maximize();
    }
