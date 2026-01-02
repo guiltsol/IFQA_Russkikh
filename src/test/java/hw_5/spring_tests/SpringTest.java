@@ -2,9 +2,10 @@ package hw_5.spring_tests;
 
 import hw_5.steps.SpringStep;
 import hw_5.utils.Config;
+import io.restassured.RestAssured;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import org.junit.jupiter.api.Test;
-
-import java.util.UUID;
 
 public class SpringTest extends SpringWebHook {
 
@@ -18,11 +19,13 @@ public class SpringTest extends SpringWebHook {
 
     @Test
     void fullAuthFlow() {
+        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
+
         steps.register();
         steps.loginFail(wrongName, expectedFailLogin);
         steps.passFail(wrongPass, expectedFailPass);
-        UUID token = steps.loginSuccess();
+        steps.loginSuccess();
         steps.logoutFail(expectedLogoutFail);
-        steps.logout(token, expectedLogoutSuccess);
+        steps.logout(expectedLogoutSuccess);
     }
 }

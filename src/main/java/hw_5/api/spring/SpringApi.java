@@ -12,7 +12,6 @@ public class SpringApi extends BaseSpringApi {
         return given()
                 .contentType("application/json")
                 .body(body)
-                .log().body()
                 .when()
                 .post(endpoint)
                 .then();
@@ -21,7 +20,6 @@ public class SpringApi extends BaseSpringApi {
     public static ValidatableResponse getRequest(String endpoint, UUID token) {
         return given()
                 .header("Authorization", token)
-                .log().headers()
                 .when()
                 .get(endpoint)
                 .then();
