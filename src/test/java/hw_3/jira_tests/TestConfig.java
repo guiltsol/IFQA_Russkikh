@@ -1,4 +1,4 @@
-package hw_3;
+package hw_3.jira_tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;

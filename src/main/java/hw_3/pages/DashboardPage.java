@@ -1,6 +1,7 @@
 package hw_3.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.cucumber.java.ru.Затем;
 
 import java.time.Duration;
 
@@ -17,6 +18,7 @@ public class DashboardPage {
         return title.shouldBe(visible, Duration.ofSeconds(10)).getText();
     }
 
+    @Затем("^переходим в проект Test$")
     public void goInTest() {
         dropList.shouldBe(visible, Duration.ofSeconds(10)).click();
         testButton.shouldBe(visible, Duration.ofSeconds(10)).click();

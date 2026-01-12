@@ -1,4 +1,4 @@
-package hw_3;
+package hw_3.jira_tests;
 
 import hw_3.pages.*;
 import hw_3.utils.CustomProperties;

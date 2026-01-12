@@ -1,6 +1,7 @@
 package hw_3.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.cucumber.java.ru.Дано;
 
 import java.time.Duration;
 
@@ -15,6 +16,7 @@ public class LoginPage {
     private final SelenideElement loginLabel = $x("//label[@id='usernamelabel']").as("Лейбл поле логина");
     private final SelenideElement passLabel = $x("//label[@id='passwordlabel']").as("Лейбл поле пароля");
 
+    @Дано("^логин - '(.*)' и пароль - '(.*)' от аккаунта Jira. Авторизируемся в аккаунт.$")
     public void authorizationInJira(String login, String password) {
         authorizationButton.shouldBe(visible, Duration.ofSeconds(10));
         loginLabel.shouldBe(visible, Duration.ofSeconds(10));

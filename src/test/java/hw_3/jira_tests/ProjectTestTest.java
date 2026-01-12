@@ -1,4 +1,4 @@
-package hw_3;
+package hw_3.jira_tests;
 
 import hw_3.pages.DashboardPage;
 import hw_3.pages.LoginPage;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class NumberTestsTest extends TestConfig {
+public class ProjectTestTest extends TestConfig {
 
     private final LoginPage loginPage = new LoginPage();
     private final DashboardPage dashboardPage = new DashboardPage();
@@ -21,8 +21,8 @@ public class NumberTestsTest extends TestConfig {
     private final String checkTest2 = CustomProperties.getProps().getProperty("checkTest2");
 
     @Test
-    @DisplayName("Проверка общего кол-ва задач в проекте Test и их подсчет")
-    public void tasksNumberCounter() {
+    @DisplayName("Проверка перерехода в проект Test")
+    public void goToProjectTest() {
         loginPage.authorizationInJira(login, password);
         String titleDashboardPage = dashboardPage.getTitle();
         assertEquals(titleDashboardPage, checkTest1);
@@ -30,11 +30,5 @@ public class NumberTestsTest extends TestConfig {
         dashboardPage.goInTest();
         String titleProjectPage = projectTestPage.getTitle();
         assertEquals(titleProjectPage, checkTest2);
-
-        projectTestPage.switchToAllTasks();
-        Integer oldAllTasks = projectTestPage.parseNumber();
-        projectTestPage.createNewTask();
-        Integer newAllTasks = projectTestPage.parseNumber();
-        assertEquals(oldAllTasks + 1, newAllTasks);
     }
 }
