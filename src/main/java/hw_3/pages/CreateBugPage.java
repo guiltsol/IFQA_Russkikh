@@ -1,6 +1,8 @@
 package hw_3.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.cucumber.java.ru.Затем;
+import io.cucumber.java.ru.И;
 import org.openqa.selenium.Keys;
 
 import java.time.Duration;
@@ -8,6 +10,7 @@ import java.util.Objects;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static org.junit.Assert.assertEquals;
 
 public class CreateBugPage {
 
@@ -37,6 +40,10 @@ public class CreateBugPage {
     private final SelenideElement becomeTask = $x("//a[@id='action_id_11']").as("Кнопка Нужно сделать");
     private final SelenideElement taskInProcess = $x("//a[@id='action_id_21']").as("Кнопка В работе");
 
+    private final TestSeleniumATHomeworkPage testSeleniumATHomeworkPage = new TestSeleniumATHomeworkPage();
+
+    @Затем("^заводим задачу на баг с описанием: название проекта - '(.*)', тема - '(.*)', описание - '(.*)'," +
+            " приоритет - '(.*)', метки - '(.*)', окружение - '(.*)', задача - '(.*)', спринт - '(.*)', тип задачи - '(.*)'$")
     public void bugHistory(String projectName, String title, String bodyDescription, String priority, String mark,
                            String bodyEnvironment, String taskLink, String sprintName, String type_task) {
         btnCreate.click();
@@ -62,20 +69,24 @@ public class CreateBugPage {
         sprint.sendKeys(sprintName + Keys.DOWN + Keys.ENTER);
         serious.click();
         finishedCreate.click();
-        switchingTheBugState();
     }
 
-    public void switchingTheBugState() {
+    @И("^переключаем сатус нашей задачи сначала на '(.*)', затем - '(.*)', а в конце - '(.*)'." +
+            " Проверяем, что статусы менялись$")
+    public void switchingTheBugState(String statusDo, String statusWork, String statusOK) {
         linkFlag.shouldBe(visible, Duration.ofSeconds(10)).click();
         becomeTask.shouldBe(visible, Duration.ofSeconds(10)).click();
         flagEnd.shouldBe(visible, Duration.ofSeconds(10));
+        assertEquals(statusDo, testSeleniumATHomeworkPage.parseStatus());
         flagEnd.shouldBe(hidden, Duration.ofSeconds(10)); // каждый раз жду, чтобы уведомление закрылось
         taskInProcess.shouldBe(visible, Duration.ofSeconds(10)).click();
         flagEnd.shouldBe(visible, Duration.ofSeconds(10));
+        assertEquals(statusWork, testSeleniumATHomeworkPage.parseStatus());
         flagEnd.shouldBe(hidden, Duration.ofSeconds(10));
         businessProc.shouldBe(visible, Duration.ofSeconds(10)).click();
         readyTask.shouldBe(visible, Duration.ofSeconds(10)).click();
         flagEnd.shouldBe(visible, Duration.ofSeconds(10));
+        assertEquals(statusOK, testSeleniumATHomeworkPage.parseStatus());
     }
 
     public void checkingTheButtonPressAndAddingARecord(SelenideElement firstBtnVisual,

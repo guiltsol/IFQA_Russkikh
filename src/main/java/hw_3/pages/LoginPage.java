@@ -1,12 +1,15 @@
 package hw_3.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import hw_3.utils.CustomProperties;
 import io.cucumber.java.ru.Дано;
+import io.cucumber.java.ru.Затем;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static org.junit.Assert.assertEquals;
 
 public class LoginPage {
 
@@ -16,7 +19,11 @@ public class LoginPage {
     private final SelenideElement loginLabel = $x("//label[@id='usernamelabel']").as("Лейбл поле логина");
     private final SelenideElement passLabel = $x("//label[@id='passwordlabel']").as("Лейбл поле пароля");
 
-    @Дано("^логин - '(.*)' и пароль - '(.*)' от аккаунта Jira. Авторизируемся в аккаунт.$")
+    private final DashboardPage dashboardPage = new DashboardPage();
+
+    private final String checkTest1 = CustomProperties.getProps().getProperty("checkTest1");
+
+    @Дано("^логин - '(.*)' и пароль - '(.*)' от аккаунта Jira. Авторизируемся в аккаунт$")
     public void authorizationInJira(String login, String password) {
         authorizationButton.shouldBe(visible, Duration.ofSeconds(10));
         loginLabel.shouldBe(visible, Duration.ofSeconds(10));
@@ -24,5 +31,11 @@ public class LoginPage {
         loginInput.shouldBe(visible, Duration.ofSeconds(10)).setValue(login);
         passwordInput.shouldBe(visible, Duration.ofSeconds(10)).setValue(password);
         authorizationButton.click();
+    }
+
+    @Затем("^проеверяем, прошла ли успешно авторизация$")
+    public void checkAuthorization() {
+        String titleDashboardPage = dashboardPage.getTitle();
+        assertEquals(titleDashboardPage, checkTest1);
     }
 }

@@ -1,6 +1,8 @@
 package hw_3.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.cucumber.java.ru.Затем;
+import io.cucumber.java.ru.И;
 import org.openqa.selenium.Keys;
 
 import java.time.Duration;
@@ -8,6 +10,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static org.junit.Assert.assertEquals;
 
 public class ProjectTestPage {
 
@@ -23,13 +26,20 @@ public class ProjectTestPage {
         return title.shouldBe(visible, Duration.ofSeconds(10)).getText();
     }
 
+    private static int oldAllTasks;
+    private static int newAllTasks;
+
+    @Затем("^переключаем фильтр на все задачи и парсим начальное кол-во всех задач на проекте$")
     public void switchToAllTasks() {
         String value = numberTasks.shouldBe(visible, Duration.ofSeconds(10)).getText();
         btnGetAllTasks.shouldBe(visible, Duration.ofSeconds(10)).click();
         AllTasks.shouldBe(visible, Duration.ofSeconds(10)).click();
         numberTasks.shouldNot(text(value), Duration.ofSeconds(10));
+
+        oldAllTasks = parseNumber();
     }
 
+    @Затем("^ищем задачу - '(.*)' в поле поиска и переход на её страницу$")
     public void quickSearch(String text) {
         inputSearch.sendKeys(text + Keys.RETURN);
     }
@@ -39,10 +49,18 @@ public class ProjectTestPage {
         return Integer.parseInt(value[value.length - 1]);
     }
 
+    @Затем("^создаем новую задачу и парсим новое кол-во всех задач на проекте$")
     public void createNewTask() {
         String value = numberTasks.shouldBe(visible, Duration.ofSeconds(10)).getText();
         btnCreateNewTask.shouldBe(visible, Duration.ofSeconds(10)).click();
         descriptionField.shouldBe(visible, Duration.ofSeconds(10)).sendKeys("Test" + Keys.RETURN);
         numberTasks.shouldNot(text(value), Duration.ofSeconds(10));
+
+        newAllTasks = parseNumber();
+    }
+
+    @И("^проверяем изменилось ли кол-во задач после создания новой задачи$")
+    public void checkNumberTasks() {
+        assertEquals(oldAllTasks + 1, newAllTasks);
     }
 }
