@@ -19,7 +19,7 @@ public class CheckoutTestSeleniumATHomeworkTest extends WebHook {
     private final String login = CustomProperties.getProps().getProperty("login");
     private final String password = CustomProperties.getProps().getProperty("password");
     private final String request = CustomProperties.getProps().getProperty("request");
-    private final String status = CustomProperties.getProps().getProperty("statusDo");
+    private final String status = CustomProperties.getProps().getProperty("status.do");
     private final String version = CustomProperties.getProps().getProperty("version");
 
     @Test

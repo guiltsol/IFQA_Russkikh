@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CreateBugPage {
 
     private final SelenideElement btnCreate = $x("//a[@id='create_link']").as("Кнопка сверху 'Создать' задачу");
-    private final SelenideElement project = $x("//input[@id='project-field']").as("Поле ввода навзвания проекта");
+    private final SelenideElement project = $x("//input[@id='project-field']").as("Поле ввода названия проекта");
     private final SelenideElement typeField = $x("//input[@id='issuetype-field']").as("Поле ввода типа задачи");
     private final SelenideElement labelField = $x("//input[@class='text long-field']").as("Поле ввода темы задачи");
     private final SelenideElement descriptionArea = $x("//div[@id='description-wiki-edit']//iframe").as("Поле ввода описания");
@@ -71,7 +71,7 @@ public class CreateBugPage {
         finishedCreate.click();
     }
 
-    @Step("переключаем сатус нашей задачи сначала на {statusDo}, затем - {statusWork}, а в конце - {statusOK}." +
+    @Step("переключаем статус нашей задачи сначала на {statusDo}, затем - {statusWork}, а в конце - {statusOK}." +
             " Проверяем, что статусы менялись")
     public void switchingTheBugState(String statusDo, String statusWork, String statusOK) {
         linkFlag.shouldBe(visible, Duration.ofSeconds(10)).click();

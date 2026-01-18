@@ -23,6 +23,7 @@ public class WebHook {
       SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
               .screenshots(true)
               .savePageSource(false)
+              .includeSelenideSteps(false)
       );
    }
 
@@ -30,7 +31,7 @@ public class WebHook {
    public static void initBrowser() {
       Configuration.pageLoadStrategy = PageLoadStrategy.EAGER.toString();
       Configuration.browser = CustomProperties.getProps().getProperty("browser");
-      System.setProperty("webdriver.chrome.driver", CustomProperties.getProps().getProperty("pathToWebDriver"));
+      System.setProperty("webdriver.chrome.driver", CustomProperties.getProps().getProperty("path.to.web.driver"));
       Configuration.timeout = Integer.parseInt(CustomProperties.getProps().getProperty("timeout"));
       Selenide.open(CustomProperties.getProps().getProperty("main.url"));
       getWebDriver().manage().window().maximize();

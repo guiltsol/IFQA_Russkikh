@@ -21,7 +21,7 @@ public class LoginPage {
 
     private final DashboardPage dashboardPage = new DashboardPage();
 
-    private final String checkTest1 = CustomProperties.getProps().getProperty("checkTest1");
+    private final String checkTest1 = CustomProperties.getProps().getProperty("check.test1");
 
     public void authorizationInJira(String login, String password) {
         Allure.step("Авторизуемся в аккаунт", () -> {

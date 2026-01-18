@@ -17,7 +17,7 @@ public class CreateBugTest extends WebHook {
     private final String login = CustomProperties.getProps().getProperty("login");
     private final String password = CustomProperties.getProps().getProperty("password");
     private final String projectName = CustomProperties.getProps().getProperty("projectName");
-    private final String titleTask = CustomProperties.getProps().getProperty("titleTask");
+    private final String titleTask = CustomProperties.getProps().getProperty("title.task");
     private final String description = CustomProperties.getProps().getProperty("description");
     private final String priority = CustomProperties.getProps().getProperty("priority");
     private final String mark = CustomProperties.getProps().getProperty("mark");
@@ -26,10 +26,10 @@ public class CreateBugTest extends WebHook {
     private final String sprint = CustomProperties.getProps().getProperty("sprint");
     private final String request = CustomProperties.getProps().getProperty("request");
     private final String version = CustomProperties.getProps().getProperty("version");
-    private final String statusDo = CustomProperties.getProps().getProperty("statusDo");
-    private final String statusWork = CustomProperties.getProps().getProperty("statusWork");
-    private final String statusOK = CustomProperties.getProps().getProperty("statusOk");
-    private final String type_task = CustomProperties.getProps().getProperty("type_task");
+    private final String statusDo = CustomProperties.getProps().getProperty("status.do");
+    private final String statusWork = CustomProperties.getProps().getProperty("status.work");
+    private final String statusOK = CustomProperties.getProps().getProperty("status.ok");
+    private final String type_task = CustomProperties.getProps().getProperty("type.task");
 
     @Test
     @DisplayName("Проверка жизненного цикла бага")

@@ -14,9 +14,9 @@ public class DashboardPage {
 
     private final SelenideElement title = $x("//h3[text() = 'Назначенные мне']").as("Заголовок 'Назначенные мне' на странице дашборда");
     private final SelenideElement dropList = $x("//a[@id='browse_link']").as("Выпадающий список по кнопке 'Проекты'");
-    private final SelenideElement testButton = $x("//a[@id='admin_main_proj_link_lnk']").as("Кнопка выбоа проекта 'Test'");
+    private final SelenideElement testButton = $x("//a[@id='admin_main_proj_link_lnk']").as("Кнопка выбора проекта 'Test'");
 
-    private final String checkTest2 = CustomProperties.getProps().getProperty("checkTest2");
+    private final String checkTest2 = CustomProperties.getProps().getProperty("check.test2");
 
     private final ProjectTestPage projectTestPage = new ProjectTestPage();
 
