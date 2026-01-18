@@ -2,10 +2,11 @@ package hw_3.jira_tests;
 
 import hw_3.pages.LoginPage;
 import hw_3.utils.CustomProperties;
+import hw_3.webhooks.WebHook;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class AuthorizationTest extends TestConfig {
+public class AuthorizationTest extends WebHook {
 
     private final LoginPage loginPage = new LoginPage();
 

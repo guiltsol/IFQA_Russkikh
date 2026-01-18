@@ -5,10 +5,11 @@ import hw_3.pages.LoginPage;
 import hw_3.pages.ProjectTestPage;
 import hw_3.pages.TestSeleniumATHomeworkPage;
 import hw_3.utils.CustomProperties;
+import hw_3.webhooks.WebHook;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class CheckoutTestSeleniumATHomeworkTest extends TestConfig {
+public class CheckoutTestSeleniumATHomeworkTest extends WebHook {
 
     private final LoginPage loginPage = new LoginPage();
     private final DashboardPage dashboardPage = new DashboardPage();

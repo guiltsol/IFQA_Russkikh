@@ -1,8 +1,7 @@
 package hw_3.pages;
 
 import com.codeborne.selenide.SelenideElement;
-import io.cucumber.java.ru.Затем;
-import io.cucumber.java.ru.И;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 
 import java.time.Duration;
@@ -10,7 +9,7 @@ import java.util.Objects;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CreateBugPage {
 
@@ -42,15 +41,16 @@ public class CreateBugPage {
 
     private final TestSeleniumATHomeworkPage testSeleniumATHomeworkPage = new TestSeleniumATHomeworkPage();
 
-    @Затем("^заводим задачу на баг с описанием: название проекта - '(.*)', тема - '(.*)', описание - '(.*)'," +
-            " приоритет - '(.*)', метки - '(.*)', окружение - '(.*)', задача - '(.*)', спринт - '(.*)', тип задачи - '(.*)'$")
+    @Step("заводим задачу на баг с описанием: название проекта - {projectName}, тема - {title}, описание - {bodyDescription}," +
+            " приоритет - {priority}, метки - {mark}, окружение - {bodyEnvironment}, задача - {taskLink}," +
+            " спринт - {sprintName}, тип задачи - {typeTask}")
     public void bugHistory(String projectName, String title, String bodyDescription, String priority, String mark,
-                           String bodyEnvironment, String taskLink, String sprintName, String type_task) {
+                           String bodyEnvironment, String taskLink, String sprintName, String typeTask) {
         btnCreate.click();
         project.shouldBe(visible, Duration.ofSeconds(10)).sendKeys(projectName + Keys.TAB);
         typeField.shouldBe(visible, Duration.ofSeconds(10)).sendKeys(Keys.CONTROL + "a");
         typeField.sendKeys(Keys.DELETE);
-        typeField.setValue(type_task);
+        typeField.setValue(typeTask);
         labelField.shouldBe(visible, enabled, interactable, clickable).setValue(title);
         checkingTheButtonPressAndAddingARecord(firstBtnVisual, descriptionArea, bodyDescription);
         fixVersion.click();
@@ -71,8 +71,8 @@ public class CreateBugPage {
         finishedCreate.click();
     }
 
-    @И("^переключаем сатус нашей задачи сначала на '(.*)', затем - '(.*)', а в конце - '(.*)'." +
-            " Проверяем, что статусы менялись$")
+    @Step("переключаем сатус нашей задачи сначала на {statusDo}, затем - {statusWork}, а в конце - {statusOK}." +
+            " Проверяем, что статусы менялись")
     public void switchingTheBugState(String statusDo, String statusWork, String statusOK) {
         linkFlag.shouldBe(visible, Duration.ofSeconds(10)).click();
         becomeTask.shouldBe(visible, Duration.ofSeconds(10)).click();

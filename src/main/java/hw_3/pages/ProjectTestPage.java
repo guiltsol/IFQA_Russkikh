@@ -1,8 +1,7 @@
 package hw_3.pages;
 
 import com.codeborne.selenide.SelenideElement;
-import io.cucumber.java.ru.Затем;
-import io.cucumber.java.ru.И;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 
 import java.time.Duration;
@@ -10,7 +9,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProjectTestPage {
 
@@ -29,7 +28,7 @@ public class ProjectTestPage {
     private static int oldAllTasks;
     private static int newAllTasks;
 
-    @Затем("^переключаем фильтр на все задачи и парсим начальное кол-во всех задач на проекте$")
+    @Step("переключаем фильтр на все задачи и парсим начальное кол-во всех задач на проекте")
     public void switchToAllTasks() {
         String value = numberTasks.shouldBe(visible, Duration.ofSeconds(10)).getText();
         btnGetAllTasks.shouldBe(visible, Duration.ofSeconds(10)).click();
@@ -39,7 +38,7 @@ public class ProjectTestPage {
         oldAllTasks = parseNumber();
     }
 
-    @Затем("^ищем задачу - '(.*)' в поле поиска и переход на её страницу$")
+    @Step("ищем задачу - {text} в поле поиска и переход на её страницу")
     public void quickSearch(String text) {
         inputSearch.sendKeys(text + Keys.RETURN);
     }
@@ -49,7 +48,7 @@ public class ProjectTestPage {
         return Integer.parseInt(value[value.length - 1]);
     }
 
-    @Затем("^создаем новую задачу и парсим новое кол-во всех задач на проекте$")
+    @Step("создаем новую задачу и парсим новое кол-во всех задач на проекте")
     public void createNewTask() {
         String value = numberTasks.shouldBe(visible, Duration.ofSeconds(10)).getText();
         btnCreateNewTask.shouldBe(visible, Duration.ofSeconds(10)).click();
@@ -59,7 +58,7 @@ public class ProjectTestPage {
         newAllTasks = parseNumber();
     }
 
-    @И("^проверяем изменилось ли кол-во задач после создания новой задачи$")
+    @Step("проверяем изменилось ли кол-во задач после создания новой задачи")
     public void checkNumberTasks() {
         assertEquals(oldAllTasks + 1, newAllTasks);
     }
