@@ -27,14 +27,11 @@ public class LoginPage {
 
     @Step("Авторизуемся в аккаунт под логином - {login} и паролем - *****")
     public void authorizationInJira(String login, @Param(mode = Parameter.Mode.MASKED) String password) {
-//            maskedPassword();
-
             authorizationButton.shouldBe(visible, Duration.ofSeconds(10));
             loginLabel.shouldBe(visible, Duration.ofSeconds(10));
             passLabel.shouldBe(visible, Duration.ofSeconds(10));
             loginInput.shouldBe(visible, Duration.ofSeconds(10)).setValue(login);
         passwordInput.shouldBe(visible, Duration.ofSeconds(10)).setValue(withText(password).sensitive());
-//            enterPassword(password);
             authorizationButton.click();
     }
 
@@ -43,17 +40,4 @@ public class LoginPage {
         String titleDashboardPage = dashboardPage.getTitle();
         assertEquals(titleDashboardPage, checkTest1);
     }
-
-//    public void maskedPassword() {
-//        Allure.getLifecycle().updateStep(stepResult -> {
-//            stepResult.getParameters().stream()
-//                    .filter(p -> "password".equals(p.getName()))
-//                    .forEach(p -> p.setValue("*****"));
-//        });
-//    }
-
-//    public void enterPassword(String password) {
-//        maskedPassword();
-//        passwordInput.setValue(password);
-//    }
 }
