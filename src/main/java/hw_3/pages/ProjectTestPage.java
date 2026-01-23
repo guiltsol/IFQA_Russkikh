@@ -21,10 +21,6 @@ public class ProjectTestPage {
     private final SelenideElement btnCreateNewTask = $x("//div[@class='iic-trigger']/button[@class='aui-button aui-button-subtle']").as("Кнопка быстрого создания задачи(плюсик)");
     private final SelenideElement inputSearch = $x("//input[@id='quickSearchInput']").as("Поле поиска сверху");
 
-    public String getTitle() {
-        return title.shouldBe(visible, Duration.ofSeconds(10)).getText();
-    }
-
     private static int oldAllTasks;
     private static int newAllTasks;
 
@@ -43,11 +39,6 @@ public class ProjectTestPage {
         inputSearch.sendKeys(text + Keys.RETURN);
     }
 
-    public Integer parseNumber() {
-        String[] value = numberTasks.shouldBe(visible, Duration.ofSeconds(10)).getText().split("\\D+");
-        return Integer.parseInt(value[value.length - 1]);
-    }
-
     @Step("создаем новую задачу и парсим новое кол-во всех задач на проекте")
     public void createNewTask() {
         String value = numberTasks.shouldBe(visible, Duration.ofSeconds(10)).getText();
@@ -61,5 +52,14 @@ public class ProjectTestPage {
     @Step("проверяем изменилось ли кол-во задач после создания новой задачи")
     public void checkNumberTasks() {
         assertEquals(oldAllTasks + 1, newAllTasks);
+    }
+
+    public String getTitle() {
+        return title.shouldBe(visible, Duration.ofSeconds(10)).getText();
+    }
+
+    public Integer parseNumber() {
+        String[] value = numberTasks.shouldBe(visible, Duration.ofSeconds(10)).getText().split("\\D+");
+        return Integer.parseInt(value[value.length - 1]);
     }
 }
