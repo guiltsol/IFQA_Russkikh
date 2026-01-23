@@ -31,7 +31,8 @@ public class LoginPage {
             loginLabel.shouldBe(visible, Duration.ofSeconds(10));
             passLabel.shouldBe(visible, Duration.ofSeconds(10));
             loginInput.shouldBe(visible, Duration.ofSeconds(10)).setValue(login);
-        passwordInput.shouldBe(visible, Duration.ofSeconds(10)).setValue(withText(password).sensitive());
+        passwordInput.shouldBe(visible, Duration.ofSeconds(10)).
+                setValue(withText(password).sensitive());
             authorizationButton.click();
     }
 
