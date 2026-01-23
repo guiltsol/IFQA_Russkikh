@@ -4,8 +4,10 @@ import hw_3.pages.*;
 import hw_3.utils.CustomProperties;
 import hw_3.webhooks.WebHook;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Тестирование возможности создания баг репорта и его закрытия")
 public class CreateBugTest extends WebHook {
 
     private final LoginPage loginPage = new LoginPage();
@@ -32,6 +34,7 @@ public class CreateBugTest extends WebHook {
     private final String type_task = CustomProperties.getProps().getProperty("type.task");
 
     @Test
+    @Tag("ID-5")
     @DisplayName("Проверка жизненного цикла бага")
     public void newBugMaker() {
         loginPage.authorizationInJira(login, password);

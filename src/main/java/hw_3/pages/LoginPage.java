@@ -2,13 +2,15 @@ package hw_3.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import hw_3.utils.CustomProperties;
-import io.qameta.allure.Allure;
+import io.qameta.allure.Param;
 import io.qameta.allure.Step;
+import io.qameta.allure.model.Parameter;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.SetValueOptions.withText;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LoginPage {
@@ -23,15 +25,17 @@ public class LoginPage {
 
     private final String checkTest1 = CustomProperties.getProps().getProperty("check.test1");
 
-    public void authorizationInJira(String login, String password) {
-        Allure.step("Авторизуемся в аккаунт", () -> {
+    @Step("Авторизуемся в аккаунт под логином - {login} и паролем - *****")
+    public void authorizationInJira(String login, @Param(mode = Parameter.Mode.MASKED) String password) {
+//            maskedPassword();
+
             authorizationButton.shouldBe(visible, Duration.ofSeconds(10));
             loginLabel.shouldBe(visible, Duration.ofSeconds(10));
             passLabel.shouldBe(visible, Duration.ofSeconds(10));
             loginInput.shouldBe(visible, Duration.ofSeconds(10)).setValue(login);
-            passwordInput.shouldBe(visible, Duration.ofSeconds(10)).setValue(password);
+        passwordInput.shouldBe(visible, Duration.ofSeconds(10)).setValue(withText(password).sensitive());
+//            enterPassword(password);
             authorizationButton.click();
-        });
     }
 
     @Step("проверяем, прошла ли успешно авторизация")
@@ -39,4 +43,17 @@ public class LoginPage {
         String titleDashboardPage = dashboardPage.getTitle();
         assertEquals(titleDashboardPage, checkTest1);
     }
+
+//    public void maskedPassword() {
+//        Allure.getLifecycle().updateStep(stepResult -> {
+//            stepResult.getParameters().stream()
+//                    .filter(p -> "password".equals(p.getName()))
+//                    .forEach(p -> p.setValue("*****"));
+//        });
+//    }
+
+//    public void enterPassword(String password) {
+//        maskedPassword();
+//        passwordInput.setValue(password);
+//    }
 }

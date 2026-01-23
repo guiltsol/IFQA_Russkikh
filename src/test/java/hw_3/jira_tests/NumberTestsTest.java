@@ -6,8 +6,10 @@ import hw_3.pages.ProjectTestPage;
 import hw_3.utils.CustomProperties;
 import hw_3.webhooks.WebHook;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Тестирование корректности подсчета кол-ва задач в проекте - Test")
 public class NumberTestsTest extends WebHook {
 
     private final LoginPage loginPage = new LoginPage();
@@ -18,6 +20,7 @@ public class NumberTestsTest extends WebHook {
     private final String password = CustomProperties.getProps().getProperty("password");
 
     @Test
+    @Tag("ID-3")
     @DisplayName("Проверка общего кол-ва задач в проекте Test и их подсчет")
     public void tasksNumberCounter() {
         loginPage.authorizationInJira(login, password);

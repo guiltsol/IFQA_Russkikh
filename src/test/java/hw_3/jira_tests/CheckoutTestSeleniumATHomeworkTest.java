@@ -7,8 +7,10 @@ import hw_3.pages.TestSeleniumATHomeworkPage;
 import hw_3.utils.CustomProperties;
 import hw_3.webhooks.WebHook;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Тестирование задачи - TestSeleniumATHomework")
 public class CheckoutTestSeleniumATHomeworkTest extends WebHook {
 
     private final LoginPage loginPage = new LoginPage();
@@ -23,6 +25,7 @@ public class CheckoutTestSeleniumATHomeworkTest extends WebHook {
     private final String version = CustomProperties.getProps().getProperty("version");
 
     @Test
+    @Tag("ID-4")
     @DisplayName("Проверка статуса и версии задачи - TestSeleniumATHomework")
     public void taskStatusCheck() {
         loginPage.authorizationInJira(login, password);

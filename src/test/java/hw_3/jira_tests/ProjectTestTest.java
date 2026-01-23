@@ -5,8 +5,10 @@ import hw_3.pages.LoginPage;
 import hw_3.utils.CustomProperties;
 import hw_3.webhooks.WebHook;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Тестирование перехода в проект - Test")
 public class ProjectTestTest extends WebHook {
 
     private final LoginPage loginPage = new LoginPage();
@@ -16,7 +18,8 @@ public class ProjectTestTest extends WebHook {
     private final String password = CustomProperties.getProps().getProperty("password");
 
     @Test
-    @DisplayName("Проверка перерехода в проект Test")
+    @Tag("ID-2")
+    @DisplayName("Проверка перехода в проект Test")
     public void goToProjectTest() {
         loginPage.authorizationInJira(login, password);
         loginPage.checkAuthorization();

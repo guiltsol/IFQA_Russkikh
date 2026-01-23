@@ -21,9 +21,8 @@ public class WebHook {
    @BeforeAll
    public static void setupAllureReports() {
       SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
-              .screenshots(true)
-              .savePageSource(false)
-              .includeSelenideSteps(false)
+              .screenshots(Boolean.parseBoolean(CustomProperties.getProps().getProperty("allure.screenshots")))
+              .savePageSource(Boolean.parseBoolean(CustomProperties.getProps().getProperty("allure.save.page.source")))
       );
    }
 
