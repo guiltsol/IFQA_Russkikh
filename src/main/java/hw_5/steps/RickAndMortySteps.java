@@ -4,13 +4,17 @@ import hw_5.api.episode.Episode;
 import hw_5.api.rick_and_morty.RickAndMortyApi;
 import hw_5.constants.EnvConstants;
 import hw_5.model.Character;
+import hw_5.utils.Config;
 import io.cucumber.java.ru.Дано;
 import io.cucumber.java.ru.Затем;
 import io.cucumber.java.ru.И;
+import io.qameta.allure.Step;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.Assertions;
 
 import java.util.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class RickAndMortySteps {
 
@@ -24,8 +28,10 @@ public class RickAndMortySteps {
         return Integer.parseInt(text.substring(text.lastIndexOf("/") + 1));
     }
 
-    @Дано("^вся информация по персонажу - '(.*)'$")
-    public void getListCharByName(String name) {
+    @Step("получаем всю информацию по нужному персонажу")
+    @Дано("^вся информация по нужному персонажу$")
+    public void getListCharByName() {
+        String name = Config.get("char.name");
         String endpoint = "/character/?name=" + name;
         listOfMortys = RickAndMortyApi.getRequest(EnvConstants.RICKANDMORTY_URL, endpoint)
                 .statusCode(HttpStatus.SC_OK)
@@ -35,6 +41,7 @@ public class RickAndMortySteps {
                 .getList("results");
     }
 
+    @Step("ID последнего эпизода, где был наш персонаж")
     @Затем("^получаем ID последнего эпизода, где был наш персонаж$")
     public void getLastEpisodeIdFromChars() {
         Set<Integer> episodeIds = new TreeSet<>();
@@ -53,7 +60,8 @@ public class RickAndMortySteps {
                 .as(Episode.class);
     }
 
-    @И("^получаем ID последнего персонажа из этого эпизода$")
+    @Step("ID последнего персонажа из последнего эпизода")
+    @И("^получаем ID последнего персонажа из последнего эпизода$")
     public void getLastCharFromEpisode() {
         List<String> characterUrls = lastEpisode.characters;
         List<Integer> characterIds = new ArrayList<>();
@@ -63,7 +71,8 @@ public class RickAndMortySteps {
         lastCharacterId = characterIds.get(characterIds.size() - 1);
     }
 
-    @Затем("^получаем данные по ID этого персонажа$")
+    @Step("данные последнего персонажа")
+    @Затем("^получаем данные последнего персонажа$")
     public void getCharacterById() {
         lastCharacter = RickAndMortyApi.getRequest(EnvConstants.RICKANDMORTY_URL,
                         "/character/" + lastCharacterId)
@@ -73,11 +82,12 @@ public class RickAndMortySteps {
                 .as(Character.class);
     }
 
+    @Step("сравнение персонажей по расе и местоположению")
     @И("^сравниваем персонажей по расе и местоположению$")
     public void compareCharacters() {
         for (Map<String, List<String>> charData : listOfMortys) {
-            Assertions.assertEquals(lastCharacter.getSpecies(), charData.get("species"));
-            Assertions.assertNotEquals(lastCharacter.getLocation(), charData.get("location"));
+            assertEquals(lastCharacter.getSpecies(), charData.get("species"));
+            assertNotEquals(lastCharacter.getLocation(), charData.get("location"));
         }
     }
 }
